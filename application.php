@@ -2,7 +2,7 @@
     class Application{
         private $post= array();
         
-        public function __construct($postarray){
+        public function __construct($postarray = array()){
            $this->post = $postarray;
         }
         function getArrayFromRequest(){
