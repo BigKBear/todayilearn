@@ -2,10 +2,17 @@
 require_once("application.php");
 class requestTestCase extends PHPUnit__Framework_Testcase{
 
-	function testGetArrayFromPost(){
+	function testGetArrayFromRequest(){
 
 		$app = new Application();
-		$this->assertTrue(is_array($app->getArrayFromPost());
+		$this->assertTrue(is_array($app->getArrayFromRequest());
+
+	}
+
+	function testGetArrayHasNameKey(){
+
+		$app = new Application();
+		$this->assertTrue(array_key_exists(key,($app->getArrayFromRequest());
 
 	}
 
