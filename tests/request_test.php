@@ -1,6 +1,6 @@
 <?php
 require_once("application.php");
-class requestTestCase extends PHPUnit_Framework_Testcase{
+class requestTestCase extends PHPUnit__Framework_Testcase{
 
 	function test(){
 
