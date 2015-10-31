@@ -6,7 +6,7 @@ class requestTestCase extends PHPUnit_Framework_Testcase{
 
 		$app = new Application();
 
-		$this->assertTrue(is_array($app->getArrayFromRequest());
+		$this->assertTrue(is_array($app->getArrayFromRequest()));
 
 	}
 
@@ -14,7 +14,7 @@ class requestTestCase extends PHPUnit_Framework_Testcase{
 
 		$app = new Application();
 		$array = $app->getArrayFromRequest();
-		$this->assertTrue(array_key_exists('username',$array);
+		$this->assertTrue(array_key_exists('username',$array));
 
 
 	}
