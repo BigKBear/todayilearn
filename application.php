@@ -3,7 +3,7 @@
         function getArrayFromRequest(){
             $thearray = array(
                                 'username'=>'username',
-                                1=>'Var_Dump',
+                                'post'=>'Var_Dump',
                                 2=>'String',
                                 3=>'Rand',
                                 4=>'Variable',
@@ -13,6 +13,10 @@
         
         function testGetArrayHasNameKey(){
             return true;
+        }
+        
+        function testGetArrayPostKeyIsString(){
+            
         }
     }
 ?>
