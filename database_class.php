@@ -133,12 +133,12 @@ class Database {
        
    }
    
-   public function updateSingleUserSkill(){
-       
+   public function updateSingleUserSkill($user_id){
+       $sql = "Select FROM user_skills WHERE id =$user_id";
    }
    
-   public function deleteSingleUserSkill(){
-       
+   public function deleteSingleUserSkill($user_id){
+       $sql = "Select FROM user_skills WHERE id =$user_id";
    }
    
 }

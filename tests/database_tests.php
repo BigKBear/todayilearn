@@ -1,7 +1,7 @@
 <?php
 //require_once('database_class.php');
-require_once('akh.db.class.php');
-require_once('akh.db.table.class.php');
+require_once('../akh.db.class.php');
+require_once('../akh.db.table.class.php');
 
 /* these tests suck but I am poking around to get the hang of it */
 
