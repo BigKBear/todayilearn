@@ -1,14 +1,18 @@
 {
     "name": "dariothornhill/til",
     "description": "A simple app for sharing learning experiences",
-    "require": {
+     "require": {
         "silex/silex": "^2.0@dev",
-        "robmorgan/phinx": "dev-master"
+        "symfony/yaml": "~2.1",
+        "robmorgan/phinx": "dev-master",
+        "symfony/process": "^2.7"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8@dev",
-        "phpunit/php-invoker": "dev-master",
-        "phpunit/dbunit": "^2.0@dev"
+        "phpunit/phpunit":"4.8.*",        
+        "phpunit/phpunit-mock-objects": "^2.0",
+        "phpunit/dbunit": "^2.0",
+	"ext-xdebug":">=2.2.1",
+	"phpunit/php-invoker": "~1.1"
     },
     "license": "MIT",
     "authors": [
