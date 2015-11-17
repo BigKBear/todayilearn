@@ -1,5 +1,5 @@
 <?php
-require_once("application.php");
+require_once("vendor/autoload.php");
 class requestTestCase extends PHPUnit_Framework_Testcase{
 
 	function testGetArrayFormRequest(){
