@@ -28,7 +28,7 @@ class TilInitialMigration extends AbstractMigration
     public function change()
     {
         // create the table
-        $posts = $this->table('posts');
+        $posts = $this->table('posts', array('id' => false, 'primary_key' => array('post_id')));
         $posts->addColumn('post_id', 'integer')
               ->addColumn('username', 'string', array('limit' => 20))
               ->addColumn('post', 'string', array('limit' => 255))
