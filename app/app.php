@@ -26,8 +26,8 @@ $app->get('/post/{id}', function ($id) use ($app) {
     $sql = "SELECT * FROM posts WHERE id = ?";
     $post = $app['db']->fetchAssoc($sql, array((int) $id));
 
-    return  "<h1>{$post['title']}</h1>".
-            "<p>{$post['body']}</p>";
+    return  "<p>{$post['post']}</p>".
+            "<p>{$post['username']}</p>";
 });
 
 $app->get('/posts', function ($id) use ($app) {
@@ -35,8 +35,8 @@ $app->get('/posts', function ($id) use ($app) {
     $posts = $app['db']->fetchAssoc($sql, array((int) $id));
 
     
-    $return .= "<h1>{$post['title']}</h1>".
-            "<p>{$post['body']}</p>";
+    return  "<p>{$post['post']}</p>".
+            "<p>{$post['username']}</p>";
 });
 
 return $app;
