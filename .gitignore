@@ -3,3 +3,7 @@
 /composer.lock
 
 /vendor/
+/php.ini
+/README.md
+
+/phinx.yml
