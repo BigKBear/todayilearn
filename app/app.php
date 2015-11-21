@@ -3,40 +3,41 @@
 require_once __DIR__.'/bootstrap.php';
 
 use Symfony\Component\HttpFoundation\Response;
+use Dflydev\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Silex\Application;
+use Silex\Provider\DoctrineServiceProvider;
 
-$app = new Silex\Application();
+$app = new Application;
 $app['debug'] = true;
-$app['autoloader']->registerNamespace('TIL', __DIR__.'/../src');
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-    'db.options' => array (
-        'driver'    => 'pdo_mysql',
-        'host'      => getenv('IP'),
-        'dbname'    => 'til_dev',
-        'user'      => getenv('PHINX_DBUSER'),
-        'password'  => getenv('PHINX_DBPASS'),
-        'charset'   => 'utf8mb4',
+
+$app->register(new DoctrineServiceProvider, array(
+    $global_config["db.options"],
+));
+
+$app->register(new DoctrineOrmServiceProvider, array(
+    //"orm.proxies_dir" => "/path/to/proxies",
+    "orm.em.options" => array(
+        "mappings" => array(
+            // Using actual filesystem paths
+            array(
+                "type" => "annotation",
+                "namespace" => "TIL\Entity",
+                "path" => __DIR__."/src/TIL/Entities",
+            )
+        ),
     ),
 ));
 
-$app->get('/hello/{name}', function($name) use($app) { 
+$app['post_repository'] = new TIL\Repository\PostRepository();
+
+$app->get('/{name}', function($name) use($app) { 
+    return new Response("Hello, {$name}!"); 
+});
+
+/*$app->get('/hello/{name}', function($name) use($app) { 
     return new Response('Hello '.$app->escape($name)); 
-});
+});*/
 
-$app->get('/post/{id}', function ($id) use ($app) {
-    $sql = "SELECT * FROM posts WHERE id = ?";
-    $post = $app['db']->fetchAssoc($sql, array((int) $id));
-
-    return  "<p>{$post['post']}</p>".
-            "<p>{$post['username']}</p>";
-});
-
-$app->get('/posts', function ($id) use ($app) {
-    $sql = "SELECT * FROM posts";
-    $posts = $app['db']->fetchAssoc($sql, array((int) $id));
-
-    
-    return  "<p>{$post['post']}</p>".
-            "<p>{$post['username']}</p>";
-});
+$app->mount('/posts',new TIL\Controllers\PostControllerProvider());
 
 return $app;
