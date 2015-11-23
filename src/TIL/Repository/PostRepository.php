@@ -4,13 +4,21 @@ namespace TIL\Repository;
 use Doctrine\DBAL\Connection;
 use TIL\Entity\Post;
  
-class PostRepository implements RepositoryInterface
+class PostRepository
 {
     protected $db;
  
-    public function __construct(Connection $db)
+    public function __construct(Connection $db = null)
     {
-        $this->db = $db;
+        if($db === null) {
+            $config = new \Doctrine\DBAL\Configuration();
+            
+            $connectionParams =$global_config["db.options"];
+            
+            $this->db = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+        } else {
+            $this->db = $db;
+        }
     }
  
     /**
@@ -33,7 +41,7 @@ class PostRepository implements RepositoryInterface
      *
      * @return array A collection of posts with the post ids as keys.
      */
-    public function findAll($limit, $offset = 0, $orderBy = array())
+    public function findAll($limit = null, $offset = 0, $orderBy = array())
     {
         // Provide a default orderBy. In our case, it's the creation date starting with the most recent
         if (!$orderBy) {
@@ -116,8 +124,8 @@ class PostRepository implements RepositoryInterface
         $post->setId($postData['post_id']);
         $post->setUser($postData['username']);
         $post->setPost($postData['post']);
-        $createdAt = new \DateTime('@' . $postData['created_at']);
-        $updatedAt = new \DateTime('@' . $postData['updated_at']);
+        $createdAt = new \DateTime('@' . strtotime($postData['created_at']));
+        $updatedAt = new \DateTime('@' . strtotime($postData['updated_at']));
         $post->setCreatedAt($createdAt);
         $post->setUpdatedAt($updatedAt);
         return $post;

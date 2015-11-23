@@ -6,4 +6,9 @@
 /php.ini
 /README.md
 
-/phinx.yml
+app/config.php
+tests/
+test_coverage/
+coverage_mahees/
+mahees_app.php
+tests/request_test.php
