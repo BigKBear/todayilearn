@@ -18,15 +18,19 @@
         "phpunit/phpunit":"4.8.*",        
         "phpunit/phpunit-mock-objects": "^2.0",
         "phpunit/dbunit": "^2.0",
-	"ext-xdebug":">=2.2.1",
-	"phpunit/php-invoker": "~1.1"
+    	"ext-xdebug":">=2.2.1",
+    	"phpunit/php-invoker": "~1.1"
     },
     "license": "MIT",
     "authors": [
         {
             "name": "Dario Thornhill",
             "email": "dario.thornhill@gmail.com"
-        }
+        },
+        {
+            "name": "Adrian Harewood",
+            "email": "aceakh@gmail.com"
+        },
     ],
     "minimum-stability": "dev"
 }
