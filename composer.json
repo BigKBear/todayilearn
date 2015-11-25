@@ -11,7 +11,8 @@
     },
     "autoload": {
 		"psr-4": {
-			"TIL\\": "src/TIL/"
+			"TIL\\": "src/TIL/",
+			"TIL\\Tests\\": "tests/TIL/Tests"
 			}
 	},
     "require-dev": {
@@ -30,7 +31,7 @@
         {
             "name": "Adrian Harewood",
             "email": "aceakh@gmail.com"
-        },
+        }
     ],
     "minimum-stability": "dev"
 }
