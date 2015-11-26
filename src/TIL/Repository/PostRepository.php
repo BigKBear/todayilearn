@@ -2,9 +2,10 @@
 namespace TIL\Repository;
  
 use Doctrine\DBAL\Connection;
+use TIL;
 use TIL\Entity\Post;
  
-class PostRepository
+class PostRepository implements \TIL\RepositoryInterface
 {
     protected $db;
  
@@ -13,7 +14,7 @@ class PostRepository
         if($db === null) {
             $config = new \Doctrine\DBAL\Configuration();
             
-            $connectionParams =$global_config["db.options"];
+            $connectionParams = $global_config["db.options"];
             
             $this->db = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
         } else {
@@ -120,14 +121,8 @@ class PostRepository
      */
     protected function buildPost($postData)
     {
-        $post = new Post();
-        $post->setId($postData['post_id']);
-        $post->setUser($postData['username']);
-        $post->setPost($postData['post']);
-        $createdAt = new \DateTime('@' . strtotime($postData['created_at']));
-        $updatedAt = new \DateTime('@' . strtotime($postData['updated_at']));
-        $post->setCreatedAt($createdAt);
-        $post->setUpdatedAt($updatedAt);
+        $post = new Post($postData);
+        
         return $post;
     }
 }

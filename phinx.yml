@@ -8,7 +8,7 @@ environments:
         adapter: mysql
         host: localhost
         name: til_live
-        user: dariothornhill1
+        user: aceakh
         pass: ''
         port: 3306
         charset: utf8
@@ -17,7 +17,7 @@ environments:
         adapter: mysql
         host: localhost
         name: til_dev
-        user: dariothornhill1
+        user: aceakh
         pass: ''
         port: 3306
         charset: utf8
@@ -26,7 +26,7 @@ environments:
         adapter: mysql
         host: localhost
         name: til_test
-        user: dariothronhill1
+        user: aceakh
         pass: ''
         port: 3306
         charset: utf8

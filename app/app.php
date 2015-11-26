@@ -34,10 +34,6 @@ $app->get('/{name}', function($name) use($app) {
     return new Response("Hello, {$name}!"); 
 });
 
-/*$app->get('/hello/{name}', function($name) use($app) { 
-    return new Response('Hello '.$app->escape($name)); 
-});*/
-
 $app->mount('/posts',new TIL\Controllers\PostControllerProvider());
 
 return $app;
