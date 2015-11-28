@@ -35,8 +35,8 @@ class TilTestData extends AbstractMigration
         $exists = $this->hasTable('posts');
         if ($exists) {
             $this->query("INSERT INTO `posts` (`post_id`, `username`, `post`, `updated_at`, `created_at`) VALUES".
-                        "(1, 'tester', 'This is a test post.', '2015-11-24 00:00:00', '2015-11-24 00:06:08'),".
-                        "(2, 'tester2', 'This is also a test post.', '2015-11-24 12:19:26', '2015-11-24 12:20:46'),".
+                        "(1, 'tester', 'This is a test post.', '2015-11-24 00:06:08', '2015-11-24 00:00:00'),".
+                        "(2, 'tester2', 'This is also a test post.', '2015-11-24 12:20:46', '2015-11-24 12:19:26'),".
                         "(3, 'tester', '<div><p>This is a post in HTML!</p></div>', '2015-11-24 14:09:02', '2015-11-24 14:09:02');");
         }
     }

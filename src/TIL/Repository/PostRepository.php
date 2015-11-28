@@ -30,7 +30,7 @@ class PostRepository implements \TIL\RepositoryInterface
      */
     public function find($id)
     {
-        $postData = $this->db->fetchAssoc('SELECT * FROM posts WHERE post_id = ?', array($id));
+        $postData = $this->db->fetchAssoc("SELECT * FROM `posts` WHERE `post_id` = ?", array($id));
         return $postData ? $this->buildPost($postData) : FALSE;
     }
     
@@ -101,7 +101,7 @@ class PostRepository implements \TIL\RepositoryInterface
      */
     public function delete($post)
     {
-        return $this->db->delete('posts', array('post_id' => $post->getId()));
+        return $this->db->delete('posts', array('post_id' => $post->getId()));;
     }
     
     /**
