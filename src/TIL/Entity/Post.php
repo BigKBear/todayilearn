@@ -24,12 +24,12 @@ class Post {
             }
             
             if(array_key_exists('created_at', $postData)) {
-                $createdAt = new \DateTime(strtotime($postData['created_at']));
+                $createdAt = \DateTime::createFromFormat("Y-m-d H:i:s", $postData["created_at"]);
                 $this->setCreatedAt($createdAt);
             }
             
             if(array_key_exists('updated_at', $postData)) {
-                $updatedAt = new \DateTime(strtotime($postData['updated_at']));
+                $updatedAt = \DateTime::createFromFormat("Y-m-d H:i:s", $postData["updated_at"]);
                 $this->setUpdatedAt($updatedAt);
             }
         }
@@ -78,7 +78,7 @@ class Post {
     {
         return $this->created_at;
     }
- 
+    
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->created_at = $createdAt;

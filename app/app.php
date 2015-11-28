@@ -9,9 +9,10 @@ use Silex\Provider\DoctrineServiceProvider;
 
 $app = new Application;
 $app['debug'] = true;
+$app['config'] = $global_config;
 
 $app->register(new DoctrineServiceProvider, array(
-    $global_config["db.options"],
+    $global_config["dbs"]["development"],
 ));
 
 $app->register(new DoctrineOrmServiceProvider, array(
