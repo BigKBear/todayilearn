@@ -45,8 +45,8 @@ class TilTestData extends AbstractMigration
     {
         $exists = $this->hasTable('posts');
         if ($exists) {
-            $this->query("DELETE FROM `posts`;")
-            $this->query("ALTER TABLE `posts` AUTO_INCREMENT = 1;")
+            $this->query("DELETE FROM `posts`;");
+            $this->query("ALTER TABLE `posts` AUTO_INCREMENT = 1;");
         }
     }
 }

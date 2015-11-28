@@ -50,6 +50,10 @@ class TilFixPostIdField extends AbstractMigration
     
     public function down()
     {
+        $exists = $this->hasTable('posts');
+        if ($exists) {
+            $this->dropTable('posts');
+        }
         $posts = $this->table('posts', array('id' => false, 'primary_key' => array('post_id')));
 	    $posts->addColumn('post_id', 'integer')
 		  ->addColumn('username', 'string', array('limit' => 20))

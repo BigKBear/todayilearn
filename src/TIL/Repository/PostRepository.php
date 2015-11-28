@@ -83,10 +83,11 @@ class PostRepository implements \TIL\RepositoryInterface
             // so if we got a post with this id already, update it
             $this->db->update('posts', $postData, array('post_id' => $post->getId()));
         } else {
-            // if it's a new post, we will insert it into the database
+            // if it's a new post, we will insert it into the database, but first we update the times
             //$postData['created_at'] = time();
             //$postData['updated_at'] = $postData['created_at'];
             $this->db->insert('posts', $postData);
+            
             // Get the id of the newly created post and set it on the entity.
             $id = $this->db->lastInsertId();
             $post->setId($id);
