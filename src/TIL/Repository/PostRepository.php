@@ -1,19 +1,20 @@
 <?php
 namespace TIL\Repository;
- 
+
 use Doctrine\DBAL\Connection;
+use TIL;
 use TIL\Entity\Post;
- 
-class PostRepository
+
+class PostRepository implements \TIL\RepositoryInterface
 {
     protected $db;
- 
+    
     public function __construct(Connection $db = null)
     {
         if($db === null) {
             $config = new \Doctrine\DBAL\Configuration();
             
-            $connectionParams =$global_config["db.options"];
+            $connectionParams = $this->global_config["dbs"]["development"];
             
             $this->db = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
         } else {
@@ -29,7 +30,7 @@ class PostRepository
      */
     public function find($id)
     {
-        $postData = $this->db->fetchAssoc('SELECT * FROM posts WHERE post_id = ?', array($id));
+        $postData = $this->db->fetchAssoc("SELECT * FROM `posts` WHERE `post_id` = ?", array($id));
         return $postData ? $this->buildPost($postData) : FALSE;
     }
     
@@ -74,18 +75,19 @@ class PostRepository
         $postData = array(
             'username' => $post->getUser(),
             'post' => $post->getPost(),
-            'updated_at' => $post->getUpdatedAt,
-            'created_at' => $post->getCreatedAt,
+            'updated_at' => $post->getUpdatedAt()->format('Y-m-d H:i:s'),
+            'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s'),
         );
         
         if ($post->getId()) {
             // so if we got a post with this id already, update it
             $this->db->update('posts', $postData, array('post_id' => $post->getId()));
         } else {
-            // if it's a new post, we will insert it into the database
-            $postData['created_at'] = time();
-            $postData['updated_at'] = $postData['created_at'];
+            // if it's a new post, we will insert it into the database, but first we update the times
+            //$postData['created_at'] = time();
+            //$postData['updated_at'] = $postData['created_at'];
             $this->db->insert('posts', $postData);
+            
             // Get the id of the newly created post and set it on the entity.
             $id = $this->db->lastInsertId();
             $post->setId($id);
@@ -99,7 +101,7 @@ class PostRepository
      */
     public function delete($post)
     {
-        return $this->db->delete('posts', array('post_id' => $post->getId()));
+        return $this->db->delete('posts', array('post_id' => $post->getId()));;
     }
     
     /**
@@ -120,14 +122,8 @@ class PostRepository
      */
     protected function buildPost($postData)
     {
-        $post = new Post();
-        $post->setId($postData['post_id']);
-        $post->setUser($postData['username']);
-        $post->setPost($postData['post']);
-        $createdAt = new \DateTime('@' . strtotime($postData['created_at']));
-        $updatedAt = new \DateTime('@' . strtotime($postData['updated_at']));
-        $post->setCreatedAt($createdAt);
-        $post->setUpdatedAt($updatedAt);
+        $post = new Post($postData);
+        
         return $post;
     }
 }

@@ -9,9 +9,10 @@ use Silex\Provider\DoctrineServiceProvider;
 
 $app = new Application;
 $app['debug'] = true;
+$app['config'] = $global_config;
 
 $app->register(new DoctrineServiceProvider, array(
-    $global_config["db.options"],
+    $global_config["dbs"]["development"],
 ));
 
 $app->register(new DoctrineOrmServiceProvider, array(
@@ -33,10 +34,6 @@ $app['post_repository'] = new TIL\Repository\PostRepository();
 $app->get('/{name}', function($name) use($app) { 
     return new Response("Hello, {$name}!"); 
 });
-
-/*$app->get('/hello/{name}', function($name) use($app) { 
-    return new Response('Hello '.$app->escape($name)); 
-});*/
 
 $app->mount('/posts',new TIL\Controllers\PostControllerProvider());
 
